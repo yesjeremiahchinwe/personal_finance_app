@@ -67,6 +67,6 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[#F2F3F7] min-w-[320px] text-[#201F24];
   }
 }
