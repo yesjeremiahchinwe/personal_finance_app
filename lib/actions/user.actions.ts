@@ -4,6 +4,7 @@ import { ID, Query } from "node-appwrite";
 import { createAdminClient, createSessionClient } from "../appwrite";
 import { cookies } from "next/headers";
 import { parseStringify } from "../utils";
+import bcrypt from "bcrypt"
 
 const {
   APPWRITE_DATABASE_ID: DATABASE_ID,
@@ -32,7 +33,7 @@ export const signIn = async ({ email, password }: signInProps) => {
     const session = await account.createEmailPasswordSession(email, password);
 
     (await cookies()).set("appwrite-session", session.secret, {
-    //   path: "/",
+      path: "/",
       httpOnly: true,
       sameSite: "strict",
       secure: true,
@@ -59,13 +60,15 @@ export const signUp = async ({ name, email, password}: SignUpParams) => {
 
     if(!newUserAccount) throw new Error('Error creating user')
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const newUser = await database.createDocument(
       DATABASE_ID!,
       USER_COLLECTION_ID!,
       ID.unique(),
       {
         email,
-        password,
+        password: hashedPassword,
         name,
         userId: newUserAccount.$id,
       }
@@ -74,7 +77,7 @@ export const signUp = async ({ name, email, password}: SignUpParams) => {
     const session = await account.createEmailPasswordSession(email, password);
 
     (await cookies()).set("appwrite-session", session.secret, {
-    //   path: "/",
+      path: "/",
       httpOnly: true,
       sameSite: "strict",
       secure: true,

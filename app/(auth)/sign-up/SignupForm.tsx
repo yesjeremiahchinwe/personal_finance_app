@@ -18,12 +18,8 @@ import Link from "next/link";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signIn, signUp } from "@/lib/actions/user.actions";
+import { signUp } from "@/lib/actions/user.actions";
 
-interface Props {
-  isLogin: boolean;
-  searchParams?: { callbackUrl: string | undefined };
-}
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Name is required.",
@@ -37,13 +33,11 @@ const formSchema = z.object({
     .min(8, { message: "Password must be at leaest 8 characters long" }),
 });
 
-const AuthForm = ({ isLogin }: { isLogin: boolean }) => {
+const SignupForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  console.log(user)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -56,42 +50,29 @@ const AuthForm = ({ isLogin }: { isLogin: boolean }) => {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true);
-    
+
     try {
-
-      if (isLogin) {
-        const response = await signIn({
-          email: data.email,
-          password: data.password
-        })
-
-        if (response) {
-          router.push("/")
-        }
-      } else {
-        const newUser = await signUp({ email: data.email, password: data.password, name: data.name })
-        setUser(newUser)
-        router.push("/")
-      }
-
+      const newUser = await signUp({
+        email: data.email,
+        password: data.password,
+        name: data.name,
+      });
+      setUser(newUser);
+      router.push("/");
     } catch (error) {
-      console.log('Error', error)
+      console.log("Error", error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
     setIsLoading(false);
-  }
-
+  };
 
   return (
     <section>
-      <h1 className="font-bold text-2xl pb-8">
-        {isLogin ? "Login" : "Sign Up"}
-      </h1>
+      <h1 className="font-bold text-2xl pb-8">Sign Up</h1>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          {!isLogin && (
             <FormField
               control={form.control}
               name="name"
@@ -113,7 +94,6 @@ const AuthForm = ({ isLogin }: { isLogin: boolean }) => {
                 </FormItem>
               )}
             />
-          )}
 
           <FormField
             control={form.control}
@@ -142,7 +122,7 @@ const AuthForm = ({ isLogin }: { isLogin: boolean }) => {
               render={({ field, fieldState }) => (
                 <FormItem>
                   <FormLabel>
-                    {isLogin ? "Password" : "Create Password"}
+                    Create Password
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -156,11 +136,9 @@ const AuthForm = ({ isLogin }: { isLogin: boolean }) => {
                     />
                   </FormControl>
                   <FormMessage />
-                  {!isLogin && (
                     <FormDescription className="text-sm text-right">
                       Passwords must be at least 8 characters
                     </FormDescription>
-                  )}
                 </FormItem>
               )}
             />
@@ -184,30 +162,22 @@ const AuthForm = ({ isLogin }: { isLogin: boolean }) => {
 
           <Button
             type="submit"
+            disabled={isLoading}
             className="bg-[#211F24] text-sm h-[46px] w-full block"
           >
-            {isLogin ? "Login" : "Create Account"}
+            {isLoading ? "Loading..." : "Create Account"}
           </Button>
 
-          {isLogin ? (
-            <small className="mt-8 flex items-center gap-1 text-center justify-center">
-              Need to create an account?{" "}
-              <Link href="/sign-up" className="font-semibold">
-                Sign Up
-              </Link>
-            </small>
-          ) : (
             <small className="mt-8 flex items-center gap-1 text-center justify-center">
               Already have an account?{" "}
               <Link href="/sign-in" className="font-semibold">
                 Login
               </Link>
             </small>
-          )}
         </form>
       </Form>
     </section>
   );
 };
 
-export default AuthForm;
+export default SignupForm;

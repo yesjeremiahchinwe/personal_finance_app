@@ -1,6 +1,6 @@
-import AuthForm from '@/components/AuthForm'
 import { Metadata } from 'next';
 import React from 'react'
+import SignupForm from './SignupForm';
 
 export const metadata: Metadata = {
   title: "Create Account",
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const SignUpPage = () => {
-  return <AuthForm isLogin={false} />
+  return <SignupForm />;
 }
 
 export default SignUpPage

@@ -1,4 +1,4 @@
-import AuthForm from '@/components/AuthForm'
+import SigninForm from '@/app/(auth)/sign-in/SigninForm';
 import { Metadata } from 'next';
 import React from 'react'
 
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const LoginPage = () => {
-  return <AuthForm isLogin={true} />
+  return <SigninForm />
 }
 
 export default LoginPage
