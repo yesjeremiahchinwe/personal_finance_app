@@ -42,7 +42,7 @@ const PotsCard = () => {
         </Link>
       </div>
 
-      <div className="mt-6 flex max-sm:flex-col gap-5 w-full">
+      <div className="mt-6 flex max-xl:flex-col gap-5 w-full">
         <div className="bg-[#F8F4F0] min-h-[110px] rounded-xl flex items-center justify-center basis-[50%] py-4 pr-4">
           <div className="flex items-center gap-3">
             <Image
@@ -59,7 +59,7 @@ const PotsCard = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-y-5 sm:gap-x-10">
+        <div className="grid grid-cols-2 items-center gap-y-5 gap-x-10 max-sm:w-full w-fit">
             {expenses.map(({ title, value, bg }) => {
               const formattedValue = formatAmount(parseInt(value))
 

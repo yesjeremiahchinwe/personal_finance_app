@@ -7,7 +7,9 @@ export const metadata: Metadata = {
 
 const BudgetsPage = () => {
   return (
-    <div>BudgetsPage</div>
+    <section>
+    Budgets Page
+    </section>
   )
 }
 
