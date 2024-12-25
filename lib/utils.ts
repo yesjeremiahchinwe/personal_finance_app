@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge"
 
 /* eslint-disable no-prototype-builtins */
 import qs from "query-string";
+import { ReactNode } from "react";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

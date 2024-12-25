@@ -18,7 +18,7 @@ const  Header = () => {
                 <h1 className="text-[#201F24] font-bold text-2xl" key={id}>{isActive && text}</h1>
             ))}
 
-            <Button onClick={handleLogOut}>Logout</Button>
+            {/* <Button onClick={handleLogOut}>Logout</Button> */}
         </header>
     )
 }

@@ -56,6 +56,14 @@ declare type SearchParamProps = {
     sharaebleId: string;
   };
   
+  declare type DummyTransaction = {
+    name: string,
+    image: string,
+    amount: string,
+    date: string,
+    trxType: string,
+    bg: string
+  }
   declare type Transaction = {
     id: string;
     $id: string;
@@ -290,6 +298,11 @@ declare type SearchParamProps = {
   declare interface signInProps {
     email: string;
     password: string;
+  }
+
+  declare interface CardProps {
+    title: string,
+    value: string
   }
   
   declare interface getUserInfoProps {
