@@ -1,16 +1,16 @@
 "use client"
 import { sidebarLinks } from "@/constants/sidebarLinks"
-import { logoutAccount } from "@/lib/actions/user.actions"
-import { redirect } from "next/navigation"
-import { Button } from "./ui/button"
+// import { logoutAccount } from "@/lib/actions/user.actions"
+// import { redirect } from "next/navigation"
+// import { Button } from "./ui/button"
 
 const  Header = () => {
     const links = sidebarLinks()
 
-    const handleLogOut = async () => {
-        await logoutAccount()
-        redirect("/sign-in")
-    }
+    // const handleLogOut = async () => {
+    //     await logoutAccount()
+    //     redirect("/sign-in")
+    // }
 
     return (
         <header className="">

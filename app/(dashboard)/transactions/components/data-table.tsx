@@ -36,12 +36,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { TransactionColumnType } from "./columns";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+// import {
+//   DropdownMenu,
+//   DropdownMenuCheckboxItem,
+//   DropdownMenuContent,
+//   DropdownMenuTrigger,
+// } from "@/components/ui/dropdown-menu"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -49,7 +49,7 @@ interface DataTableProps<TData, TValue> {
   setSelectedCategory: (selectedCategory: string) => void
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TValue>({
   columns,
   data,
   setSelectedCategory

@@ -33,7 +33,6 @@ const formSchema = z.object({
 const   SigninForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const router = useRouter();
-  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({

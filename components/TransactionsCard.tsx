@@ -1,7 +1,6 @@
-// import { transactions } from "@/constants/transactions";
 import { transactions } from "@/constants";
 import { cn, formatAmount, formatDateTime } from "@/lib/utils";
-import { ChevronRight, MinusIcon, PlusIcon } from "lucide-react";
+import { ChevronRight, PlusIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 

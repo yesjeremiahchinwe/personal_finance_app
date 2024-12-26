@@ -36,7 +36,6 @@ const formSchema = z.object({
 const SignupForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const router = useRouter();
-  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -52,12 +51,11 @@ const SignupForm = () => {
     setIsLoading(true);
 
     try {
-      const newUser = await signUp({
+      await signUp({
         email: data.email,
         password: data.password,
         name: data.name,
       });
-      setUser(newUser);
       router.push("/");
     } catch (error) {
       console.log("Error", error);
@@ -73,27 +71,25 @@ const SignupForm = () => {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field, fieldState }) => (
-                <FormItem>
-                  <FormLabel>Full Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="text"
-                      {...field}
-                      className={
-                        fieldState?.error
-                          ? "border-red-500"
-                          : "border-[#98908B]"
-                      }
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormLabel>Full Name</FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    {...field}
+                    className={
+                      fieldState?.error ? "border-red-500" : "border-[#98908B]"
+                    }
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <FormField
             control={form.control}
@@ -121,9 +117,7 @@ const SignupForm = () => {
               name="password"
               render={({ field, fieldState }) => (
                 <FormItem>
-                  <FormLabel>
-                    Create Password
-                  </FormLabel>
+                  <FormLabel>Create Password</FormLabel>
                   <FormControl>
                     <Input
                       type={showPassword ? "text" : "password"}
@@ -136,9 +130,9 @@ const SignupForm = () => {
                     />
                   </FormControl>
                   <FormMessage />
-                    <FormDescription className="text-sm text-right">
-                      Passwords must be at least 8 characters
-                    </FormDescription>
+                  <FormDescription className="text-sm text-right">
+                    Passwords must be at least 8 characters
+                  </FormDescription>
                 </FormItem>
               )}
             />
@@ -168,12 +162,12 @@ const SignupForm = () => {
             {isLoading ? "Loading..." : "Create Account"}
           </Button>
 
-            <small className="mt-8 flex items-center gap-1 text-center justify-center">
-              Already have an account?{" "}
-              <Link href="/sign-in" className="font-semibold">
-                Login
-              </Link>
-            </small>
+          <small className="mt-8 flex items-center gap-1 text-center justify-center">
+            Already have an account?{" "}
+            <Link href="/sign-in" className="font-semibold">
+              Login
+            </Link>
+          </small>
         </form>
       </Form>
     </section>

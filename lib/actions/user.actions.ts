@@ -3,7 +3,6 @@
 import { ID, Query } from "node-appwrite";
 import { createAdminClient, createSessionClient } from "../appwrite";
 import { cookies } from "next/headers";
-import { parseStringify } from "../utils";
 import bcrypt from "bcrypt"
 
 const {
@@ -21,7 +20,7 @@ export const getUserInfo = async ({ userId }: getUserInfoProps) => {
       [Query.equal('userId', [userId])]
     )
 
-    return parseStringify(user.documents[0]);
+    return JSON.parse(JSON.stringify(user.documents[0]))
   } catch (error) {
     console.log(error)
   }
@@ -41,7 +40,7 @@ export const signIn = async ({ email, password }: signInProps) => {
 
     const user = await getUserInfo({ userId: session.userId }) 
 
-    return parseStringify(user);
+    return JSON.parse(JSON.stringify(user))
   } catch (error) {
     console.error('Error', error);
   }
@@ -83,7 +82,7 @@ export const signUp = async ({ name, email, password}: SignUpParams) => {
       secure: true,
     });
 
-    return parseStringify(newUser);
+    return JSON.parse(JSON.stringify(newUser))
   } catch (error) {
     console.error('Error', error);
   }
@@ -96,7 +95,7 @@ export async function getLoggedInUser() {
 
     const user = await getUserInfo({ userId: result.$id})
 
-    return parseStringify(user);
+    return JSON.parse(JSON.stringify(user))
   } catch (error) {
     console.log(error)
     return null;
@@ -111,6 +110,7 @@ export const logoutAccount = async () => {
 
     await account.deleteSession('current');
   } catch (error) {
+    console.log(error)
     return null;
   }
 }
