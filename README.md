@@ -6,7 +6,7 @@
 
 ## Links
 
-- Live Site URL: [Vercel](https://jeremiah-chinwe.vercel.app/)
+- Live Site URL: [Vercel](https://personal-finance-app-drab.vercel.app/)
 
 ## Author
 
