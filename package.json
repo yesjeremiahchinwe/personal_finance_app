@@ -12,6 +12,7 @@
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-label": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.1",
+    "@tanstack/react-table": "^8.20.6",
     "bcrypt": "^5.1.1",
     "chart.js": "^4.4.7",
     "class-variance-authority": "^0.7.1",

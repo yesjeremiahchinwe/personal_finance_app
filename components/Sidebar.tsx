@@ -14,7 +14,7 @@ const Sidebar = () => {
   return (
     <aside
       className={cn(
-        "hidden static top-0 left-0 lg:block max-h-screen bg-[#201F24] rounded-tr-xl rounded-br-xl duration-500 transition-all",
+        "hidden h-screen static top-0 left-0 lg:block max-h-screen bg-[#201F24] rounded-tr-xl rounded-br-xl duration-500 transition-all",
         isMinimizeMenu ? "basis-[30px]" : "basis-[300px]"
       )}
     >

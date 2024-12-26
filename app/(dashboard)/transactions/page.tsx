@@ -1,4 +1,7 @@
 import { Metadata } from "next";
+import { DataTable } from "./components/data-table";
+import { columns } from "./components/columns";
+import { transactions } from "@/constants";
 
 export const metadata: Metadata = {
     title: "Transactions",
@@ -6,8 +9,11 @@ export const metadata: Metadata = {
   };
 
 const TransactionsPage = () => {
+
     return (
-      <div>TransactionsPage</div>
+      <section className="bg-white rounded-xl p-10">
+         <DataTable columns={columns} data={transactions} />
+      </section>
     )
   }
   

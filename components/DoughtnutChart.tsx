@@ -1,5 +1,6 @@
 "use client";
 
+import { formatAmount } from "@/lib/utils";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
@@ -18,7 +19,7 @@ const DoughnutChart = () => {
   };
 
   return (
-    <div className="max-w-[99%] mx-auto">
+    <div className="max-w-[99%] mx-auto relative">
       <Doughnut
         data={data}
         width={240}
@@ -32,6 +33,11 @@ const DoughnutChart = () => {
           },
         }}
       />
+
+      <div className="absolute top-[40%] left-[28%] flex flex-col items-center justify-center gap-1">
+        <h5 className="text-3xl font-bold">{formatAmount(338)}</h5>
+        <h6 className="text-sm text-[#696868]">of {formatAmount(975)} limit</h6>
+      </div>
     </div>
   );
 };

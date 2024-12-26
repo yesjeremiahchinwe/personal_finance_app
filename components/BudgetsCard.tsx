@@ -2,30 +2,9 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import DoughnutChart from "./DoughtnutChart";
 import { formatAmount } from "@/lib/utils";
+import { budgets } from "@/constants";
 
 const BudgetsCard = () => {
-  const budgets = [
-    {
-      title: "Entertianment",
-      value: "50",
-      bg: "#277C78"
-    },
-    {
-      title: "Bills",
-      value: "750",
-      bg: "#82C9D7"
-    },
-    {
-      title: "Dining Out",
-      value: "75",
-      bg: "#F2CDAC"
-    },
-    {
-      title: "Personal Care",
-      value: "100",
-      bg: "#626070"
-    },
-  ]
 
   return (
     <section className="min-h-[410px] rounded-xl bg-white col-span-12 lg:col-span-5 row-span-2 p-5 sm:p-6">
@@ -44,16 +23,16 @@ const BudgetsCard = () => {
         <DoughnutChart />
 
         <div className="grid max-xl:grid-cols-2 grid-cols-1 gap-y-5 gap-x-10">
-          {budgets.map(({ title, value, bg }) => {
-            const formattedValue = formatAmount(parseInt(value));
+          {budgets.map(({ category, maximum, theme }) => {
+            const formattedValue = formatAmount(maximum);
 
             return (
               <div
-                key={title}
+                key={category}
                 className={`border-l-[4px] ps-3`}
-                style={{ borderColor: `${bg}` }}
+                style={{ borderColor: `${theme}` }}
               >
-                <h6 className="text-[#696868] text-xs">{title}</h6>
+                <h6 className="text-[#696868] text-xs">{category}</h6>
                 <h5 className="font-semibold pt-1">{formattedValue}</h5>
               </div>
             );
