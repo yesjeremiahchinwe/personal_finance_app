@@ -8,7 +8,7 @@ const MobileNav = () => {
   const links = sidebarLinks();
 
   return (
-    <footer className="max-lg:flex items-center justify-center hidden bg-[#201F24] rounded-t-xl fixed bottom-0 w-full">
+    <footer className="max-lg:flex items-center justify-center hidden bg-[#201F24] rounded-t-xl fixed bottom-0 w-full overflow-x-hidden">
       <div className="flex justify-between items-center gap-6 w-[90%] mx-auto">
         {links.map(({ link, text, icon, isActive, id }) => (
           <Link

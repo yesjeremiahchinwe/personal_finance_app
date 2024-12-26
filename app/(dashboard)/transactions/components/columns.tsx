@@ -22,7 +22,6 @@ export const columns: ColumnDef<TransactionColumnType>[] = [
     header: "Recipient / Sender",
     cell: ({ row }) => {
       const data = row.original;
-
       return (
         <div className="flex items-center gap-4">
           <Image
