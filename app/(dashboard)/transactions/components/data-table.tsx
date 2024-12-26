@@ -7,7 +7,10 @@ import {
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
+  SortingState,
   useReactTable,
+  VisibilityState
 } from "@tanstack/react-table";
 
 import {
@@ -32,17 +35,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { TransactionColumnType } from "./columns";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+  data: TransactionColumnType[];
+  setSelectedCategory: (selectedCategory: string) => void
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-}: DataTableProps<TData, TValue>) {
+  setSelectedCategory
+}: DataTableProps<TransactionColumnType, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [sorting, setSorting] = useState<SortingState>([])
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+
   const table = useReactTable({
     data,
     columns,
@@ -50,13 +65,18 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
     state: {
+      sorting,
       columnFilters,
+      columnVisibility
     },
   });
   const [isMounted, setIsMounted] = useState(false);
 
-  const pageOptions = table.getPageOptions();
+  const pageOptions = table?.getPageOptions();
 
   const handlePagination = (page: number) => {
     table.setPageIndex(page);
@@ -95,30 +115,65 @@ export function DataTable<TData, TValue>({
             />
           </div>
 
+          {/* <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="ml-auto">
+              Columns
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter(
+                (column) => column.getCanHide()
+              )
+              .map((column) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                )
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu> */}
+
           <div className="flex max-sm:flex-col items-center gap-4">
-            <Select defaultValue="Latest">
+            <Select
+              defaultValue="asc"
+              onValueChange={() => {
+                const column = table?.getColumn("date");
+                table
+                  .getColumn("date")
+                  ?.toggleSorting(column?.getIsSorted() === "asc");
+              }}
+            >
               <SelectGroup>
                 <div className="flex items-center">
                   <SelectLabel className="text-[#696868] flex-nowrap font-normal">
                     Sort By
                   </SelectLabel>
                   <SelectTrigger className="w-[180px] border-[#98908B]">
-                    <SelectValue defaultValue="Latest" className="text-2xl" />
+                    <SelectValue defaultValue="asc" className="text-2xl" />
                   </SelectTrigger>
                 </div>
 
                 <SelectContent>
-                  <SelectItem value="Latest">Latest</SelectItem>
-                  <SelectItem value="Oldest">Oldest</SelectItem>
-                  <SelectItem value="A to Z">A to Z</SelectItem>
-                  <SelectItem value="Z to A">Z to A</SelectItem>
-                  <SelectItem value="Highest">Highest</SelectItem>
-                  <SelectItem value="Lowest">Lowest</SelectItem>
+                  <SelectItem value="asc">Latest</SelectItem>
+                  <SelectItem value="desc">Oldest</SelectItem>
                 </SelectContent>
               </SelectGroup>
             </Select>
 
-            <Select defaultValue="All Transactions">
+            <Select defaultValue="All Transactions" onValueChange={(value) => {
+              setSelectedCategory(value)
+            }}>
               <SelectGroup>
                 <div className="flex items-center">
                   <SelectLabel className="text-[#696868] font-normal">
@@ -147,7 +202,7 @@ export function DataTable<TData, TValue>({
           </div>
         </div>
 
-        <Table>
+        <Table className="relative">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -167,8 +222,8 @@ export function DataTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
+            {table?.getRowModel().rows?.length ? (
+              table?.getRowModel().rows?.map((row) => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
@@ -200,7 +255,7 @@ export function DataTable<TData, TValue>({
       <div className="flex items-center justify-between space-x-2 pt-10">
         <Button
           variant="outline"
-          size="lg"
+          size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
           className="border-[#98908B]"
@@ -209,8 +264,8 @@ export function DataTable<TData, TValue>({
           Previous
         </Button>
 
-        <div className="flex items-center gap-3">
-          {pageOptions.map((page, index) => (
+        <div className="flex flex-wrap items-center gap-3">
+          {pageOptions?.map((page, index) => (
             <Button
               size="sm"
               key={index}
@@ -227,7 +282,7 @@ export function DataTable<TData, TValue>({
 
         <Button
           variant="outline"
-          size="lg"
+          size="sm"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
           className="border-[#98908B]"
