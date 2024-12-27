@@ -99,7 +99,7 @@ export function DataTable<TValue>({
           <div className="relative">
             <Input
               placeholder="Search transactions"
-              className="p-5 border-[#98908B] placeholder:max-lg:text-xs placeholder:text-sm w-full min-w-[320px]"
+              className="p-5 border-[#98908B] placeholder:max-lg:text-xs placeholder:text-sm w-full lg:min-w-[320px]"
               value={
                 (table.getColumn("sender")?.getFilterValue() as string) ?? ""
               }

@@ -26,12 +26,12 @@ const TransactionsCard = () => {
           const formattedDate = formatDateTime(new Date(data.date)).dateOnly;
 
           return (
-            <div key={index} className="flex justify-between gap-4">
+            <div key={index} className="flex justify-between items-center gap-4">
               <div className="flex items-center gap-3 sm:gap-4">
                 {index === 1 ? (
                   <Image
                     src={data.avatar}
-                    alt={data.name}
+                    alt={data.name} 
                     width={40}
                     height={40}
                     className="rounded-full"
@@ -68,7 +68,7 @@ const TransactionsCard = () => {
                   {data.amount > 0 && <PlusIcon size={13} />}
                   {formattedAmount}
                 </h6>
-                <small className="text-[#696868]">{formattedDate}</small>
+                <small className="text-[#696868] max-sm:hidden">{formattedDate}</small>
               </div>
             </div>
           );
