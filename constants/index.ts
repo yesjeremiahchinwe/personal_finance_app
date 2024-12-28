@@ -507,3 +507,33 @@ export const colors = [
     value: "#BE6C49"
   }
 ]
+
+export const categories = [
+  {
+    text: "Entertainment"
+  },
+  {
+    text: "Bills"
+  },
+  {
+    text: "Groceries"
+  },
+  {
+    text: "Dining Out"
+  },
+  {
+    text: "Transaportation"
+  },
+  {
+    text: "Education"
+  },
+  {
+    text: "Personal Care"
+  },
+  {
+    text: "Lifestyle"
+  },
+  {
+    text: "Shopping"
+  }
+]

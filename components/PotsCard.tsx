@@ -30,7 +30,7 @@ const PotsCard = () => {
   ]
 
   return (
-    <section className="min-h-[218px] rounded-xl bg-white col-span-12 lg:col-span-7 row-span-1 p-5 sm:p-6">
+    <section className="min-h-[218px] rounded-xl bg-white col-span-12 xl:col-span-7 row-span-1 p-5 sm:p-6">
       <div className="flex items-center justify-between w-full">
         <h3 className="text-[#201F24] text-xl font-semibold">Pots</h3>
         <Link

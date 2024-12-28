@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const BudgetsPage = () => {
   return (
-    <section className="flex max-lg:flex-col gap-6">
+    <section className="flex max-xl:flex-col gap-6">
       <BudgetsComponent />
 
       <div className="basis-[55%] grid grid-cols-1 gap-5">

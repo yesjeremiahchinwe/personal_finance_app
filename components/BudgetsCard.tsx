@@ -7,7 +7,7 @@ import { budgets } from "@/constants";
 const BudgetsCard = () => {
 
   return (
-    <section className="min-h-[410px] rounded-xl bg-white col-span-12 lg:col-span-5 row-span-2 p-5 sm:p-6">
+    <section className="min-h-[410px] rounded-xl bg-white col-span-12 xl:col-span-5 row-span-2 p-5 sm:p-6 flex justify-center items-center flex-col">
       <div className="flex items-center justify-between w-full">
         <h3 className="text-[#201F24] text-xl font-semibold">Budgets</h3>
         <Link
@@ -19,10 +19,10 @@ const BudgetsCard = () => {
         </Link>
       </div>
 
-      <div className="flex flex-col md:flex-row lg:flex-col xxl:flex-row items-center justify-center pt-12 gap-6 w-full">
+      <div className="flex flex-col md:flex-row lg:flex-col xxl:flex-row items-center justify-center pt-12 gap-6 w-fit max-lg:gap-x-10">
         <DoughnutChart />
 
-        <div className="grid lg:grid-cols-2 xxl:grid-cols-1 grid-cols-1 gap-y-5 gap-x-10">
+        <div className="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2   xxl:grid-cols-1 gap-y-5 gap-x-10">
           {budgets.map(({ category, maximum, theme }) => {
             const formattedValue = formatAmount(maximum);
 
@@ -35,7 +35,7 @@ const BudgetsCard = () => {
                 <h6 className="text-[#696868] text-xs">{category}</h6>
                 <h5 className="font-semibold pt-1">{formattedValue}</h5>
               </div>
-            );
+            )
           })}
         </div>
       </div>

@@ -21,7 +21,7 @@ const RecurringBillsCard = () => {
     }
   ]
   return (
-    <section className="min-h-[327] rounded-xl bg-white col-span-12 lg:col-span-5 row-span-1 p-5 sm:p-6">
+    <section className="min-h-[327] rounded-xl bg-white col-span-12 xl:col-span-5 row-span-1 p-5 sm:p-6">
       <div className="flex items-center justify-between w-full">
         <h3 className="text-[#201F24] text-xl font-semibold">Recurring Bills</h3>
         <Link href="/recurring-bills" className="text-xs text-[#696868] flex items-center gap-3">
