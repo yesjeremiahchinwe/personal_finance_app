@@ -19,7 +19,7 @@ const BudgetsCard = () => {
         </Link>
       </div>
 
-      <div className="flex lg:flex-col xxl:flex-row items-center justify-center pt-12 gap-6 w-full">
+      <div className="flex flex-col md:flex-row lg:flex-col xxl:flex-row items-center justify-center pt-12 gap-6 w-full">
         <DoughnutChart />
 
         <div className="grid lg:grid-cols-2 xxl:grid-cols-1 grid-cols-1 gap-y-5 gap-x-10">

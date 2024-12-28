@@ -464,3 +464,46 @@ export const pots = [
     theme: "#826CB0",
   },
 ];
+
+export const colors = [
+  {
+    text: "Green",
+    value: "#277C78"
+  },
+  {
+    text: "Yellow",
+    value: "#F2CDAC"
+  },
+  {
+    text: "Cyan",
+    value: "#82C9D7"
+  },
+  {
+    text: "Navy",
+    value: "#626070"
+  },
+  {
+    text: "Red",
+    value: "#C94736"
+  },
+  {
+    text: "Purple",
+    value: "#826CB0"
+  },
+  {
+    text: "Blue",
+    value: "#3F82B2"
+  },
+  {
+    text: "Magenta",
+    value: "#934F6F"
+  },
+  {
+    text: "Gold",
+    value: "#CAB361"
+  },
+  {
+    text: "Orange",
+    value: "#BE6C49"
+  }
+]
