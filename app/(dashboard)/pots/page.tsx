@@ -6,7 +6,11 @@ export const metadata: Metadata = {
 };
 
 const PotsPage = () => {
-  return <div>PotsPage</div>;
+  return (
+    <section className="h-screen flex items-center justify-center w-full">
+      <h1 className="text-[#201F24] italic font-semibold">Coming Soon...</h1>
+    </section>
+  )
 };
 
 export default PotsPage;

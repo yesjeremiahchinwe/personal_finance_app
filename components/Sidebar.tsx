@@ -16,8 +16,8 @@ const Sidebar = ({ isMinimizeMenu, setIsMinimizeMenu }: Props) => {
   return (
     <aside
       className={cn(
-        "hidden h-screen fixed top-0 left-0 lg:block bg-[#201F24] rounded-tr-xl rounded-br-xl duration-500 transition-[width]",
-        isMinimizeMenu ? "w-[70px]" : "w-[240px]"
+        "hidden h-screen fixed top-0 left-0 z-10 lg:block bg-[#201F24] rounded-tr-xl rounded-br-xl duration-500 transition-[width]",
+        isMinimizeMenu ? "w-[70px]" : "w-[300px]"
       )}
     >
       <div className="pb-6 px-7">

@@ -58,12 +58,20 @@ declare type SearchParamProps = {
   
   declare type DummyTransaction = {
     name: string,
-    image: string,
-    amount: string,
+    avatar: string,
+    category: string,
+    amount: number,
     date: string,
-    trxType: string,
-    bg: string
+    recurring: boolean
   }
+
+  declare type Budget = {
+    category: string,
+    maximum: number,
+    spent: number,
+    theme: string
+  }
+
   declare type Transaction = {
     id: string;
     $id: string;

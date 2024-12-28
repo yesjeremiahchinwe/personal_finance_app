@@ -29,7 +29,7 @@ export const columns: ColumnDef<TransactionColumnType>[] = [
             alt={data.name}
             width={40}
             height={40}
-            className="rounded-full"
+            className="max-sm:hidden rounded-full"
           />
           <h6 className="font-semibold text-sm text-[#201F24]">{data.name}</h6>
         </div>
@@ -42,7 +42,7 @@ export const columns: ColumnDef<TransactionColumnType>[] = [
   },
   {
     accessorKey: "date",
-    header: "Transaction Date",
+    header: "Date",
     cell: ({ row }) => {
       const formattedDate = formatDateTime(
         new Date(row.original.date)

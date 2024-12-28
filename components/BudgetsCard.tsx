@@ -19,10 +19,10 @@ const BudgetsCard = () => {
         </Link>
       </div>
 
-      <div className="flex max-xl:flex-col items-center justify-center pt-12 gap-6 w-full">
+      <div className="flex lg:flex-col xxl:flex-row items-center justify-center pt-12 gap-6 w-full">
         <DoughnutChart />
 
-        <div className="grid max-xl:grid-cols-2 grid-cols-1 gap-y-5 gap-x-10">
+        <div className="grid lg:grid-cols-2 xxl:grid-cols-1 grid-cols-1 gap-y-5 gap-x-10">
           {budgets.map(({ category, maximum, theme }) => {
             const formattedValue = formatAmount(maximum);
 

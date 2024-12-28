@@ -55,7 +55,15 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		  screens: {
+			// xs: "480px",
+			// ss: "620px",
+			// sm: "768px",
+			// md: "1060px",
+			// lg: "1200px",
+			xxl: "1510px",
+		  },
   	}
   },
   plugins: [require("tailwindcss-animate")],

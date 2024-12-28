@@ -2,7 +2,7 @@ import Card from "@/components/Card";
 import { Metadata } from "next";
 import PotsCard from "@/components/PotsCard";
 import BudgetsCard from "@/components/BudgetsCard";
-import TransactionsCard from "@/components/TransactionsCard";
+import TransactionsCard from "@/components/TransactionsList";
 import RecurringBillsCard from "@/components/RecurringBillsCard";
 
 export const metadata: Metadata = {
