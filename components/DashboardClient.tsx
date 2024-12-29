@@ -28,7 +28,7 @@ const DashboardClient = ({ children }: { children: ReactNode }) => {
           )}
         >
           <Header />
-          <div className="mt-5 px-4 lg:px-10">{children}</div>
+          <div className="mt-2 lg:mt-5 px-4 lg:px-10">{children}</div>
         </div>
       </div>
     </main>

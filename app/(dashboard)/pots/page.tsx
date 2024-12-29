@@ -1,4 +1,6 @@
+import { pots } from "@/constants";
 import { Metadata } from "next";
+import Pot from "./components/Pot";
 
 export const metadata: Metadata = {
   title: "Pots",
@@ -7,8 +9,10 @@ export const metadata: Metadata = {
 
 const PotsPage = () => {
   return (
-    <section className="h-screen flex items-center justify-center w-full">
-      <h1 className="text-[#201F24] italic font-semibold">Coming Soon...</h1>
+    <section className="min-h-screen grid grid-cols-1 gap-6 lg:grid-cols-2 w-full">
+      {pots.map((pot, index) => (
+        <Pot key={index} {...pot} />
+      ))}
     </section>
   )
 };

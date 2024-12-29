@@ -30,8 +30,8 @@ const FormSchema = z.object({
   category: z.string({
     required_error: "Please select category for budget.",
   }),
-  maximum_spend: z.string({
-    required_error: "Please select your maximum spend.",
+  maximum_spend: z.string().min(2, {
+    message: "Maximum spend must be at least 2 characters long.",
   }),
   theme: z.string({
     required_error: "Please select a theme for budget.",
@@ -127,11 +127,14 @@ const EditBudgetsModal: React.FC<EditBudgetModalProps> = ({
             render={({ field }) => (
               <FormItem className="relative">
                 <FormLabel>Maximum Spend</FormLabel>
+                <FormControl>
                 <Input
                   className="h-[45px] block ps-8 border-[#98908B]"
                   placeholder="e.g. 2000"
                   defaultValue={field.value}
+                  {...field}
                 />
+                </FormControl>
                 <DollarSignIcon
                   color="#696868"
                   size={16}
@@ -155,7 +158,7 @@ const EditBudgetsModal: React.FC<EditBudgetModalProps> = ({
                   }}
                 >
                   <FormControl>
-                    <SelectTrigger className="h-[45px] ps-10 border-[#98908B]">
+                    <SelectTrigger className="h-[45px] ps-9 border-[#98908B]">
                       <SelectValue placeholder="Select theme" />
                     </SelectTrigger>
                   </FormControl>
@@ -182,7 +185,7 @@ const EditBudgetsModal: React.FC<EditBudgetModalProps> = ({
 
                 <div
                   style={{ backgroundColor: `${field.value?.toLowerCase()}` }}
-                  className="w-5 h-5 rounded-full absolute top-[37px] left-3"
+                  className="w-4 h-4 rounded-full absolute top-[37px] left-3"
                 />
 
                 <FormMessage />

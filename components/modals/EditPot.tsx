@@ -9,6 +9,7 @@ import { z } from "zod";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -23,42 +24,49 @@ import {
 } from "@/components/ui/select";
 import { Input } from "../ui/input";
 import { DollarSignIcon } from "lucide-react";
-import { budgets, categories, colors } from "@/constants";
+import { colors, pots } from "@/constants";
 import { cn } from "@/lib/utils";
 
 const FormSchema = z.object({
-  category: z.string({
-    required_error: "Please select category for budget.",
+  name: z.string().min(2, {
+    message: "Pot name must be at least 2 characters long.",
   }),
-  maximum_spend: z.string().min(2, {
-    message: "Maximum spend must be at least 2 characters long.",
+  target: z.string().min(2, {
+    message: "Target must be at least 2 characters long.",
   }),
   theme: z.string({
-    required_error: "Please select a theme for budget.",
+    required_error: "Please select a theme for pot.",
   }),
 });
 
-interface AddBudgetModalProps {
+interface EditPotModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
   loading: boolean;
+  name: string;
+  target: number;
+  theme: string
 }
 
-const AddBudgetsModal: React.FC<AddBudgetModalProps> = ({
+const EditPot: React.FC<EditPotModalProps> = ({
   isOpen,
   onClose,
   onConfirm,
   loading,
+  name,
+  target,
+  theme
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [isOpenSelect, setIsOpenSelect] = useState(false);
+  const [potNameLength, setPotNameLength] = useState<number>(0);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      category: "",
-      maximum_spend: "",
-      theme: "",
+      name,
+      target: `${target}`,
+      theme,
     },
   });
 
@@ -77,8 +85,8 @@ const AddBudgetsModal: React.FC<AddBudgetModalProps> = ({
 
   return (
     <Modal
-      title="Add New Budget"
-      description="Choose a category to set a spending budget. These categories can help you monitor spending."
+      title="Edit Pot"
+      description="If your saving targets change, feel free to update your pots."
       isOpen={isOpen}
       onClose={onClose}
     >
@@ -89,54 +97,41 @@ const AddBudgetsModal: React.FC<AddBudgetModalProps> = ({
         >
           <FormField
             control={form.control}
-            name="category"
+            name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Budget Category</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger className="h-[45px] border-[#98908B]">
-                      <SelectValue placeholder="Select budget category" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {categories.map((data, index) => (
-                      <SelectItem
-                        key={index}
-                        value={data.text}
-                        className={cn(
-                          "py-4 border-b-[#F2F2F2]",
-                          field.value === data.text
-                            ? "border-none"
-                            : "border-b-2"
-                        )}
-                      >
-                        {data.text}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
+                <FormLabel>Pot Name</FormLabel>
+                <FormControl>
+                  <Input
+                    className="h-[45px] block ps-4 border-[#98908B]"
+                    placeholder="e.g. Rainy Days"
+                    onInput={(event) => {
+                      setPotNameLength(event.currentTarget.value?.length);
+                    }}
+                    maxLength={30}
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription className="text-right">
+                  {potNameLength < 30 ? 30 - potNameLength : 0} characters left
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
           <FormField
             control={form.control}
-            name="maximum_spend"
+            name="target"
             render={({ field }) => (
               <FormItem className="relative">
-                <FormLabel>Maximum Spend</FormLabel>
-              <FormControl>
-              <Input
-                  className="h-[45px] block ps-8 border-[#98908B]"
-                  placeholder="e.g. 2000"
-                  {...field}
-                />
-                </FormControl>  
+                <FormLabel>Target</FormLabel>
+                <FormControl>
+                  <Input
+                    className="h-[45px] block ps-8 border-[#98908B]"
+                    placeholder="e.g. 2000"
+                    {...field}
+                  />
+                </FormControl>
                 <DollarSignIcon
                   color="#696868"
                   size={18}
@@ -160,7 +155,12 @@ const AddBudgetsModal: React.FC<AddBudgetModalProps> = ({
                   }}
                 >
                   <FormControl>
-                    <SelectTrigger className={cn("h-[45px] border-[#98908B]", field.value ? "ps-9" : "ps-4")}>
+                    <SelectTrigger
+                      className={cn(
+                        "h-[45px] border-[#98908B]",
+                        field.value ? "ps-9" : "ps-4"
+                      )}
+                    >
                       <SelectValue placeholder="Select theme" />
                     </SelectTrigger>
                   </FormControl>
@@ -178,9 +178,7 @@ const AddBudgetsModal: React.FC<AddBudgetModalProps> = ({
                         />
                         <SelectItem
                           disabled={
-                            budgets.find(
-                              (budget) => budget.theme === data.value
-                            )
+                            pots.find((pot) => pot.theme === data.value)
                               ? true
                               : false
                           }
@@ -196,9 +194,7 @@ const AddBudgetsModal: React.FC<AddBudgetModalProps> = ({
                         </SelectItem>
 
                         {isOpenSelect &&
-                          budgets.find(
-                            (budget) => budget.theme === data.value
-                          ) && (
+                          pots.find((pt) => pt.theme === data.value) && (
                             <span className="absolute top-[18px] right-8 text-[#696868] text-xs">
                               Already used
                             </span>
@@ -222,7 +218,7 @@ const AddBudgetsModal: React.FC<AddBudgetModalProps> = ({
             className="f;ex items-center justify-center w-full py-7 bg-[#201F24]"
             type="submit"
           >
-            Add Budget
+            Save Changes
           </Button>
         </form>
       </Form>
@@ -230,4 +226,4 @@ const AddBudgetsModal: React.FC<AddBudgetModalProps> = ({
   );
 };
 
-export default AddBudgetsModal;
+export default EditPot;

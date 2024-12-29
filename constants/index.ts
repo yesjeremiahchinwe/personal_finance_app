@@ -436,7 +436,7 @@ export const pots = [
   {
     name: "Savings",
     target: 2000.0,
-    total: 159.0,
+    total: 139.0,
     theme: "#277C78",
   },
   {

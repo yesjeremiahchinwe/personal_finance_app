@@ -1,25 +1,25 @@
 import { Button } from "../ui/button";
 import { Modal } from "../ui/modal";
 
-interface DeleteBudgetModalProps {
+interface DeletePotModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
   loading: boolean;
-  category: string;
+  name: string;
 }
 
-const DeleteBudgetModal = ({
+const DeletePotModal = ({
   isOpen,
   onClose,
   onConfirm,
   loading,
-  category,
-}: DeleteBudgetModalProps) => {
+  name,
+}: DeletePotModalProps) => {
   return (
     <Modal
-      title={`Delete '${category}'?`}
-      description="Are you sure you want to delete this budget? This action cannot be reversed, and all the data inside it will be removed forever."
+      title={`Delete '${name}'?`}
+      description="Are you sure you want to delete this pot? This action cannot be reversed, and all the data inside it will be removed forever."
       isOpen={isOpen}
       onClose={onClose}
     >
@@ -44,4 +44,4 @@ const DeleteBudgetModal = ({
   );
 };
 
-export default DeleteBudgetModal;
+export default DeletePotModal;
