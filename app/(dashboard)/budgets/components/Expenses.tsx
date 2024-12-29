@@ -65,7 +65,7 @@ const Expenses = ({ budget }: Props) => {
 
         <div className="bg-[#F8F4F0] h-8 rounded-md w-full">
           <div
-            className="h-8 rounded-md"
+            className="h-8 rounded-md duration-500 transition-[width]"
             style={{
               width: `calc(${
                 spent >= maximum ? 100 : (spent / maximum) * 100

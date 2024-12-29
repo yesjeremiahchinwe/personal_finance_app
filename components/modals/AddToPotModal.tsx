@@ -18,7 +18,7 @@ import { Input } from "../ui/input";
 import { useState } from "react";
 import { Button } from "../ui/button";
 
-interface WithdrawPotModalProps {
+interface AddToPotModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
@@ -34,7 +34,7 @@ const FormSchema = z.object({
   }),
 });
 
-const WithdrawPotModal = ({
+const AddToPotModal = ({
   isOpen,
   onClose,
   onConfirm,
@@ -42,12 +42,12 @@ const WithdrawPotModal = ({
   name,
   total,
   target,
-}: WithdrawPotModalProps) => {
+}: AddToPotModalProps) => {
   const [amountInputValue, setAmountInputValue] = useState<string>("");
   const [updatedTotal, setUpdatedTotal] = useState<number>(total);
   const calculateExpensesInPercentage: number =
-    parseInt(amountInputValue) && parseInt(amountInputValue) <= total
-      ? ((total - parseInt(amountInputValue)) / target) * 100
+    parseInt(amountInputValue) && parseInt(amountInputValue) <= (target + total)
+      ? ((total + parseInt(amountInputValue)) / target) * 100
       : (total / target) * 100;
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -64,7 +64,7 @@ const WithdrawPotModal = ({
 
   return (
     <Modal
-      title={`Withdraw from '${name}'?`}
+      title={`Add to '${name}'?`}
       description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus  hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet."
       isOpen={isOpen}
       onClose={onClose}
@@ -72,7 +72,7 @@ const WithdrawPotModal = ({
       <div className="flex items-center justify-between mt-4 w-full">
         <h5 className="text-base font-normal">New Amount</h5>
         <h3 className="text-2xl lg:text-4xl font-semibold">
-          {parseInt(amountInputValue) > total
+          {(parseInt(amountInputValue) + total) > target
             ? formatAmount(total)
             : formatAmount(updatedTotal)}
         </h3>
@@ -85,14 +85,14 @@ const WithdrawPotModal = ({
             width: `calc(${
               (parseInt(amountInputValue) + total) >= target ? 100 : calculateExpensesInPercentage
             }%)`,
-            backgroundColor: "#C94736",
+            backgroundColor: "#277C78",
           }}
         />
       </div>
 
       <div className="flex items-center justify-between w-full my-4">
         <small className="font-light text-sm text-[#696868]">
-          {calculateExpensesInPercentage.toFixed(2)}%
+          {(parseInt(amountInputValue) + total) >= target ? 100 :calculateExpensesInPercentage.toFixed(2)}%
         </small>
         <small className="font-light text-sm text-[#696868]">
           Target of {formatAmount(target)}
@@ -109,7 +109,7 @@ const WithdrawPotModal = ({
             name="amount"
             render={({ field }) => (
               <FormItem className="relative">
-                <FormLabel>Amount to Withdraw</FormLabel>
+                <FormLabel>Amount to Add</FormLabel>
                 <FormControl>
                   <Input
                     className="h-[45px] block ps-8 border-[#98908B]"
@@ -117,7 +117,7 @@ const WithdrawPotModal = ({
                     onInput={(event) => {
                       setAmountInputValue(event.currentTarget.value);
                       setUpdatedTotal(
-                        total - (parseInt(event.currentTarget.value) || 0)
+                        total + (parseInt(event.currentTarget.value) || 0)
                       );
                     }}
                     {...field}
@@ -134,11 +134,11 @@ const WithdrawPotModal = ({
           />
 
           <Button
-            disabled={loading || parseInt(amountInputValue) > total}
+            disabled={loading || (total + parseInt(amountInputValue)) > target}
             className="flex mt-2 items-center justify-center w-full py-7 bg-[#201F24]"
             type="submit"
           >
-            Confirm Withdrawal
+            Confirm Addition
           </Button>
         </form>
       </Form>
@@ -146,4 +146,4 @@ const WithdrawPotModal = ({
   );
 };
 
-export default WithdrawPotModal;
+export default AddToPotModal;
