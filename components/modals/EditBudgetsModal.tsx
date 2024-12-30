@@ -43,9 +43,9 @@ interface EditBudgetModalProps {
   onClose: () => void;
   onConfirm: () => void;
   loading: boolean;
-  category: string,
-  maximum: number,
-  theme: string
+  category: string;
+  maximum: number;
+  theme: string;
 }
 
 const EditBudgetsModal: React.FC<EditBudgetModalProps> = ({
@@ -55,22 +55,22 @@ const EditBudgetsModal: React.FC<EditBudgetModalProps> = ({
   loading,
   category,
   maximum,
-  theme
+  theme,
 }) => {
   const [isMounted, setIsMounted] = useState(false);
-  const [isOpenSelect, setIsOpenSelect] = useState(false)
+  const [isOpenSelect, setIsOpenSelect] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      category: category,
-      maximum_spend: maximum.toString(),
-      theme: theme,
+      category: category || "",
+      maximum_spend: maximum.toString() || "0",
+      theme: theme || "",
     },
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data);
-    onConfirm()
+    onConfirm();
   }
 
   useEffect(() => {
@@ -101,7 +101,7 @@ const EditBudgetsModal: React.FC<EditBudgetModalProps> = ({
                 <FormLabel>Budget Category</FormLabel>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  defaultValue={field?.value}
                 >
                   <FormControl>
                     <SelectTrigger className="h-[45px] border-[#98908B]">
@@ -110,7 +110,16 @@ const EditBudgetsModal: React.FC<EditBudgetModalProps> = ({
                   </FormControl>
                   <SelectContent>
                     {categories.map((data, index) => (
-                      <SelectItem key={index} value={data.text} className={cn("py-4 border-b-[#F2F2F2]", field.value === data.text ? "border-none" : "border-b-2")}>
+                      <SelectItem
+                        key={index}
+                        value={data.text}
+                        className={cn(
+                          "py-4 border-b-[#F2F2F2]",
+                          field.value === data.text
+                            ? "border-none"
+                            : "border-b-2"
+                        )}
+                      >
                         {data.text}
                       </SelectItem>
                     ))}
@@ -128,12 +137,11 @@ const EditBudgetsModal: React.FC<EditBudgetModalProps> = ({
               <FormItem className="relative">
                 <FormLabel>Maximum Spend</FormLabel>
                 <FormControl>
-                <Input
-                  className="h-[45px] block ps-8 border-[#98908B]"
-                  placeholder="e.g. 2000"
-                  defaultValue={field.value}
-                  {...field}
-                />
+                  <Input
+                    className="h-[45px] block ps-8 border-[#98908B]"
+                    placeholder="e.g. 2000"
+                    {...field}
+                  />
                 </FormControl>
                 <DollarSignIcon
                   color="#696868"
@@ -152,9 +160,9 @@ const EditBudgetsModal: React.FC<EditBudgetModalProps> = ({
                 <FormLabel>Theme</FormLabel>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  defaultValue={field?.value}
                   onOpenChange={(opened) => {
-                    setIsOpenSelect(opened)
+                    setIsOpenSelect(opened);
                   }}
                 >
                   <FormControl>
@@ -164,20 +172,43 @@ const EditBudgetsModal: React.FC<EditBudgetModalProps> = ({
                   </FormControl>
                   <SelectContent>
                     {colors.map((data, index) => (
-                      <div key={index} className="relative flex items-center gap-1">
+                      <div
+                        key={index}
+                        className="relative flex items-center gap-1"
+                      >
                         <div
                           style={{
                             backgroundColor: `${data.value}`,
                           }}
                           className="w-[18px] absolute left-4 z-10 top-5 h-[18px] -mt-0.5 rounded-full"
                         />
-                        <SelectItem disabled={budgets.find(budget => budget.theme === data.value) ? true : false } value={`${data.value}`} className={cn("pl-12 py-4 border-b-[#F2F2F2]", field.value === data.text ? "border-none" : "border-b-2")}>
+                        <SelectItem
+                          disabled={
+                            budgets.find(
+                              (budget) => budget.theme === data.value
+                            )
+                              ? true
+                              : false
+                          }
+                          value={`${data.value}`}
+                          className={cn(
+                            "pl-12 py-4 border-b-[#F2F2F2]",
+                            field.value === data.text
+                              ? "border-none"
+                              : "border-b-2"
+                          )}
+                        >
                           {data.text}
                         </SelectItem>
 
-                        {isOpenSelect && budgets.find(budget => budget.theme === data.value) && (
-                          <span className="absolute top-[18px] text-xs right-8 text-[#696868]">Already used</span>
-                        )}
+                        {isOpenSelect &&
+                          budgets.find(
+                            (budget) => budget.theme === data.value
+                          ) && (
+                            <span className="absolute top-[18px] text-xs right-8 text-[#696868]">
+                              Already used
+                            </span>
+                          )}
                       </div>
                     ))}
                   </SelectContent>
@@ -193,7 +224,7 @@ const EditBudgetsModal: React.FC<EditBudgetModalProps> = ({
             )}
           />
           <Button
-          disabled={loading}
+            disabled={loading}
             className="f;ex items-center justify-center w-full py-7 bg-[#201F24]"
             type="submit"
           >

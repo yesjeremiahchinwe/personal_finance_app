@@ -1,4 +1,5 @@
 import { cn, formatAmount } from "@/lib/utils";
+import { CardProps } from "@/types";
 
 const Card = ({ title, value }: CardProps) => {
   const formattedValue = formatAmount(parseInt(value));

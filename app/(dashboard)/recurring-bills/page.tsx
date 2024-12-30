@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import BillsClient from "./components/bills-client";
 
 export const metadata: Metadata = {
     title: "Recurring Bills",
@@ -6,11 +7,7 @@ export const metadata: Metadata = {
   };
 
 const RecurringBillsPage = () => {
-    return (
-      <section className="h-screen flex items-center justify-center w-full">
-      <h1 className="text-[#201F24] italic font-semibold">Coming Soon...</h1>
-    </section>
-    )
+    return <BillsClient />
   }
   
   export default RecurringBillsPage

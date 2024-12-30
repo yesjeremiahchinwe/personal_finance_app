@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 interface Props {
   isMinimizeMenu: boolean;
@@ -12,6 +13,7 @@ interface Props {
 }
 const Sidebar = ({ isMinimizeMenu, setIsMinimizeMenu }: Props) => {
   const links = sidebarLinks();
+  const router = useRouter()
 
   return (
     <aside
@@ -26,9 +28,10 @@ const Sidebar = ({ isMinimizeMenu, setIsMinimizeMenu }: Props) => {
           alt="Logo"
           width={16}
           height={16}
-          className={`duration-500 pt-10 transition-[opacity] ${
+          className={`cursor-pointer duration-500 pt-10 transition-[opacity] ${
             isMinimizeMenu ? "opacity-1" : "opacity-0"
           }`}
+          onClick={() => router.push("/")}
         />
 
         <Image
@@ -36,9 +39,10 @@ const Sidebar = ({ isMinimizeMenu, setIsMinimizeMenu }: Props) => {
           alt="Logo"
           width={100}
           height={50}
-          className={`transition-[opacity] -mt-6 ${
+          className={`cursor-pointer transition-[opacity] -mt-6 ${
             isMinimizeMenu ? "opacity-0" : "opacity-1"
           }`}
+          onClick={() => router.push("/")}
         />
       </div>
 

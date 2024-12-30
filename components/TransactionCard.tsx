@@ -1,4 +1,5 @@
 import { cn, formatAmount, formatDateTime } from '@/lib/utils';
+import { DummyTransaction } from '@/types';
 import { PlusIcon } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react'

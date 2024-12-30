@@ -1,3 +1,5 @@
+import { Budget, RecurringBill } from "@/types";
+
 export const balance = [
   {
     current: 4836.0,
@@ -405,6 +407,65 @@ export const transactions = [
   },
 ];
 
+export const recurringBills: RecurringBill[] = [
+  {
+    avatar: "/avatars/spark-electric-solutions.jpg",
+    name: "Spark Electric Solutions",
+    date: "Montly-2nd",
+    amount: 100,
+    status: "paid",
+  },
+  {
+    avatar: "/avatars/serenity-spa-and-wellness.jpg",
+    name: "Serenity Spa & Wellness",
+    date: "Monthly-3rd",
+    amount: 30,
+    status: "paid",
+  },
+  {
+    avatar: "/avatars/elevate-education.jpg",
+    name: "Elevate Education",
+    date: "Monthly-4th",
+    amount: 50,
+    status: "paid",
+  },
+  {
+    avatar: "/avatars/pixel-playground.jpg",
+    name: "Pixel Playground",
+    date: "Monthly-11th",
+    amount: 10,
+    status: "paid",
+  },
+  {
+    avatar: "/avatars/nimbus-data-storage.jpg",
+    name: "Nimbus Data Storage",
+    date: "Monthly-21th",
+    amount: 9.99,
+    status: "overdue",
+  },
+  {
+    avatar: "/avatars/bytewise.jpg",
+    name: "ByteWise",
+    date: "Monthly-23rd",
+    amount: 49.99,
+    status: "overdue",
+  },
+  {
+    avatar: "/avatars/ecofuel-energy.jpg",
+    name: "EcoFuel Energy",
+    date: "Monthly-29th",
+    amount: 35.0,
+    status: "upcoming",
+  },
+  {
+    avatar: "/avatars/aqua-flow-utilities.jpg",
+    name: "Aqua Flow Utilities",
+    date: "Monthly-30th",
+    amount: 100,
+    status: "upcoming",
+  }
+];
+
 export const budgets: Budget[] = [
   {
     category: "Entertainment",
@@ -468,72 +529,72 @@ export const pots = [
 export const colors = [
   {
     text: "Green",
-    value: "#277C78"
+    value: "#277C78",
   },
   {
     text: "Yellow",
-    value: "#F2CDAC"
+    value: "#F2CDAC",
   },
   {
     text: "Cyan",
-    value: "#82C9D7"
+    value: "#82C9D7",
   },
   {
     text: "Navy",
-    value: "#626070"
+    value: "#626070",
   },
   {
     text: "Red",
-    value: "#C94736"
+    value: "#C94736",
   },
   {
     text: "Purple",
-    value: "#826CB0"
+    value: "#826CB0",
   },
   {
     text: "Blue",
-    value: "#3F82B2"
+    value: "#3F82B2",
   },
   {
     text: "Magenta",
-    value: "#934F6F"
+    value: "#934F6F",
   },
   {
     text: "Gold",
-    value: "#CAB361"
+    value: "#CAB361",
   },
   {
     text: "Orange",
-    value: "#BE6C49"
-  }
-]
+    value: "#BE6C49",
+  },
+];
 
 export const categories = [
   {
-    text: "Entertainment"
+    text: "Entertainment",
   },
   {
-    text: "Bills"
+    text: "Bills",
   },
   {
-    text: "Groceries"
+    text: "Groceries",
   },
   {
-    text: "Dining Out"
+    text: "Dining Out",
   },
   {
-    text: "Transaportation"
+    text: "Transaportation",
   },
   {
-    text: "Education"
+    text: "Education",
   },
   {
-    text: "Personal Care"
+    text: "Personal Care",
   },
   {
-    text: "Lifestyle"
+    text: "Lifestyle",
   },
   {
-    text: "Shopping"
-  }
-]
+    text: "Shopping",
+  },
+];

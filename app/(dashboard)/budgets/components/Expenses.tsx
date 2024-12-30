@@ -15,6 +15,7 @@ import {
 import { useState } from "react";
 import EditBudgetsModal from "@/components/modals/EditBudgetsModal";
 import DeleteBudgetModal from "@/components/modals/DeleteBudgetModal";
+import { Budget } from "@/types";
 
 interface Props {
   budget: Budget;

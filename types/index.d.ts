@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 
+import { decl } from "postcss";
+
 declare type SearchParamProps = {
     params: { [key: string]: string };
     searchParams: { [key: string]: string | string[] | undefined };
@@ -70,6 +72,15 @@ declare type SearchParamProps = {
     maximum: number,
     spent: number,
     theme: string
+  }
+
+  declare type RecurringBill = {
+    avatar: string,
+    name: string,
+    date: string,
+    amount: number,
+    status: "paid" | "upcoming" | "overdue"
+
   }
 
   declare type Transaction = {
@@ -303,7 +314,7 @@ declare type SearchParamProps = {
     bankId: string;
   }
   
-  declare interface signInProps {
+  declare interface SignInProps {
     email: string;
     password: string;
   }

@@ -4,6 +4,7 @@ import { ID, Query } from "node-appwrite";
 import { createAdminClient, createSessionClient } from "../appwrite";
 import { cookies } from "next/headers";
 import bcrypt from "bcrypt"
+import { getUserInfoProps, SignInProps, SignUpParams } from "@/types";
 
 const {
   APPWRITE_DATABASE_ID: DATABASE_ID,
@@ -26,7 +27,7 @@ export const getUserInfo = async ({ userId }: getUserInfoProps) => {
   }
 }
 
-export const signIn = async ({ email, password }: signInProps) => {
+export const signIn = async ({ email, password }: SignInProps) => {
   try {
     const { account } = await createAdminClient();
     const session = await account.createEmailPasswordSession(email, password);

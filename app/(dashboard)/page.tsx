@@ -4,6 +4,7 @@ import PotsCard from "@/components/PotsCard";
 import BudgetsCard from "@/components/BudgetsCard";
 import TransactionsCard from "@/components/TransactionsList";
 import RecurringBillsCard from "@/components/RecurringBillsCard";
+import { CardProps } from "@/types";
 
 export const metadata: Metadata = {
   title: "Overview",

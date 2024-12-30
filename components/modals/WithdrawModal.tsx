@@ -92,7 +92,7 @@ const WithdrawPotModal = ({
 
       <div className="flex items-center justify-between w-full my-4">
         <small className="font-light text-sm text-[#696868]">
-          {calculateExpensesInPercentage.toFixed(2)}%
+        {(parseInt(amountInputValue) + total) >= target ? 100 :calculateExpensesInPercentage.toFixed(2)}%
         </small>
         <small className="font-light text-sm text-[#696868]">
           Target of {formatAmount(target)}
